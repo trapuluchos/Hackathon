@@ -1,0 +1,22 @@
+<td>
+    {{ repositorio.name }}
+</td>
+<td>
+    {{ repositorio.description }}
+</td>
+<td>
+    {{ repositorio.stargazers_count }}
+</td>
+<td>
+    <button 
+        class="btn btn-sm btn-primary"
+        *ngIf="!seleccionado"
+        (click)="agregarRepo()"
+    >Seleccionar</button>
+    
+    <button 
+        *ngIf="seleccionado"
+        class="btn btn-sm btn-warning" 
+        (click)="quitarRepo()"
+    >Quitar</button>
+</td>

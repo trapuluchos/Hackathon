@@ -1,0 +1,39 @@
+<div class="animate__animated animate__fadeInLeft">
+    <p class="text-center fw-light m-0">REPOCITORIO GITHUB</p>
+    <div class="my-3">
+        <label class="form-label">Nombre de Usuario Github</label>
+        <input type="text" class="form-control" [formControl]="githubUsername" placeholder="Ingrese su nombre de usuario de Github">
+    </div>
+
+    <app-perfil 
+        *ngIf="githubUser !== null" 
+        [githubUser]="githubUser" 
+        [loading]="loading" 
+        (onEmiterUrl)="getRepoUser( $event )"
+    ></app-perfil>
+
+    <app-loading
+        *ngIf="loading"
+        width="5rem" 
+        height="5rem" 
+        mensaje="Buscando, por favor espere..."
+    ></app-loading>
+
+    <app-error-msg  
+        *ngIf="error" 
+        mensaje="No se encontrarron resultados para {{ githubUsername.value }}"
+    ></app-error-msg>
+
+    <!-- <app-table-repos  [repositorios]="repositorios"></app-table-repos> -->
+    <app-table-repos *ngIf="repositorios.length > 0" [repositorios]="repositorios"></app-table-repos>
+
+    <div class="text-center mt-3">
+        <a class="btn btn-primary m-1" (click)="volver()">Regresar</a>
+        
+        <button 
+            type="submit" 
+            class="btn btn-primary m-1" 
+            [disabled]="!( repositoriosSeleccionados.length >= 1)"
+        >Enviar Formulario</button>
+    </div>
+</div>

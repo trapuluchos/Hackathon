@@ -1,0 +1,94 @@
+<div class="animate__animated animate__fadeInLeft">
+    <p class="text-center fw-light">INFORMACIÓN PERSONAL</p>
+
+    <form [formGroup]="infoPersonalForm" (ngSubmit)="nextForm()">
+        <div class="row">
+            <!-- Nombres -->
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Nombres</label>
+                    <input type="text" [class]="setClassName('nombres')" placeholder="Ingrese sus nombres."
+                        formControlName="nombres">
+                    <small
+                        *ngIf="infoPersonalForm.controls['nombres'].errors && infoPersonalForm.controls['nombres'].touched"
+                        class="form-text text-danger">Ingrese su nombre correctamente.</small>
+                </div>
+            </div>
+
+            <!-- Apellidos -->
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Apellidos</label>
+                    <input type="text" [class]="setClassName('apellidos')" placeholder="Ingrese sus apellidos."
+                        formControlName="apellidos">
+                    <small
+                        *ngIf="infoPersonalForm.controls['apellidos'].errors && infoPersonalForm.controls['apellidos'].touched"
+                        class="form-text text-danger">Ingrese su apellido correctamente.</small>
+                </div>
+            </div>
+
+            <!-- Cedula de Identidad -->
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Cedula de Identidad</label>
+                    <input type="text" [class]="setClassName('ci')" placeholder="Número de cedula de identidad."
+                        formControlName="ci">
+                    <small *ngIf="infoPersonalForm.controls['ci'].errors && infoPersonalForm.controls['ci'].touched"
+                        class="form-text text-danger">Cedula de identidad no válida.</small>
+                </div>
+            </div>
+
+            <!-- Extensión -->
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Extensión</label>
+                    <select [class]="setClassName('extension')" formControlName="extension">
+                        <option selected value="">-- Seleccione extensión --</option>
+                        <option value="CH">CH</option>
+                        <option value="LP">LP</option>
+                        <option value="CB">CB</option>
+                        <option value="OR">OR</option>
+                        <option value="PT">PT</option>
+                        <option value="TJ">TJ</option>
+                        <option value="SC">SC</option>
+                        <option value="BE">BE</option>
+                        <option value="PD">PD</option>
+                    </select>
+                    <small
+                        *ngIf="infoPersonalForm.controls['extension'].errors && infoPersonalForm.controls['extension'].touched"
+                        class="form-text text-danger">Seleccione una extensión.</small>
+                </div>
+            </div>
+
+
+            <!-- Dirección -->
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Dirección</label>
+                    <input type="text" [class]="setClassName('direccion')" placeholder="Dirección domiciliaria." formControlName="direccion">
+                    <small *ngIf="infoPersonalForm.controls['direccion'].errors && infoPersonalForm.controls['direccion'].touched"
+                        class="form-text text-danger">Dirección no válida.</small>
+                </div>
+            </div>
+
+
+            <!-- Fecha de Nacimiento -->
+            <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Fecha de Nacimiento</label>
+                    <input type="date" [class]="setClassName('fechaNacimiento')" placeholder="Fecha de nacimiento."
+                        formControlName="fechaNacimiento">
+                    <small
+                        *ngIf="infoPersonalForm.controls['fechaNacimiento'].errors && infoPersonalForm.controls['fechaNacimiento'].touched"
+                        class="form-text text-danger">Ingrese su fecha de nacimiento.</small>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" [disabled]="esMayor">
+                    Siguiente
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
