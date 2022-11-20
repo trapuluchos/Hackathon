@@ -30,8 +30,8 @@
     <div class="text-center mt-3">
         <a class="btn btn-primary m-1" (click)="volver()">Regresar</a>
         
-        <button 
-            type="submit" 
+        <button  
+            (click)="next()"
             class="btn btn-primary m-1" 
             [disabled]="!( repositoriosSeleccionados.length >= 1)"
         >Enviar Formulario</button>

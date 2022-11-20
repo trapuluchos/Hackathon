@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import Swal from 'sweetalert2';
 
-import { GithubRepoResponse } from '../../interfaces/github-response.interface';
 import { FormService } from '../../services/form.service';
+import { GithubRepoResponse } from '../../interfaces/github-response.interface';
 
 @Component({
   // selector: 'app-repo-item',

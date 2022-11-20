@@ -1,0 +1,59 @@
+<div class="card">
+    <div class="card-header text-center">
+        Resúmen de Inscripción
+    </div>
+    <div class="card-body text-center">
+        <p class="fw-bold">
+            Nombres: <small class="fw-light">{{ infoPersonal?.nombres }}</small>
+        </p>
+        <p class="fw-bold">
+            Apellidos: <small class="fw-light">{{ infoPersonal?.apellidos }}</small>
+        </p>
+        <p class="fw-bold">
+            Cédula de Identidad: <small class="fw-light">{{ infoPersonal?.ci }} {{ infoPersonal?.extension }}</small>
+        </p>
+        <p class="fw-bold">
+            Fecha de Nacimiento: <small class="fw-light">{{ infoPersonal?.fechaNacimiento }}</small>
+        </p>
+        <p class="fw-bold">
+            Dirección: <small class="fw-light">{{ infoPersonal?.direccion }}</small>
+        </p>
+
+        
+        <div class="card-header text-center">
+            Repositorios Seleccoiandos
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Estrellas</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let repo of infoPersonal?.repositorios">
+                        <td>{{ repo.nombre }}</td>
+                        <td>{{ repo.estrellas }}</td>
+                        <td>
+                            <a 
+                                class="btn btn-outline-primary" 
+                                [href]="repo.enlace" 
+                                target="_blank"
+                            >Ver</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="text-center">
+            <button class="btn btn-danger m-3" (click)="enviar(1)">Enviar por email</button>
+            <button class="btn btn-success m-3" (click)="enviar(2)" target="_blank">Enviar por whatsapp</button>
+        </div>
+
+        {{ infoPersonal?.repositorios | json }}
+    </div>
+</div>

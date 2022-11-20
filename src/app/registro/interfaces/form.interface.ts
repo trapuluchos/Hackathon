@@ -1,14 +1,12 @@
-export interface InformacionPersonal {
+import { GithubRepoSmall } from './github-response.interface';
+
+export interface Registro {
     nombres: string;
     apellidos: string;
     ci: string
     extension: string
     fechaNacimiento: string;
-    direccion?: string;
+    direccion: string;
+    repositorios?: GithubRepoSmall[];
 }
 
-// export interface Direccion {
-//     direccion: string;
-//     lng: number;
-//     lat: number;
-// }

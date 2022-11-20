@@ -33,6 +33,11 @@ export interface GithubUserResponse {
     updated_at:          Date;
 }
 
+export interface GithubRepoSmall {
+    nombre: string;
+    estrellas: number;
+    enlace: string;
+}
 
 export interface GithubRepoResponse {
     id:                          number;

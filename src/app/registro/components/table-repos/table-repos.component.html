@@ -1,18 +1,17 @@
 
-<div class="table-responsive mt-4 animate__animated animate__fadeIn">
-    <!-- <p class="text-center text-muted mt-2 mb-0"></p> -->
+<div class="mt-4 animate__animated animate__fadeIn">
     <div class="card">
         <div class="card-header text-center">
             Seleccione como máximo 2 repositorios
         </div>
-        <div class="card-body">
-            <table class="table table-hover w-100">
+        <div class="card-body table-responsive">
+            <table datatable [dtOptions]="dtOptions" class="table table-hover w-100">
                 <thead>
                     <tr>
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Estrellas</th>
-                        <th>Seleccionar</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,6 +20,7 @@
                         *ngFor="let repo of repositorios" 
                         [repositorio]="repo"
                     ></tr>
+
                 </tbody>
             </table>
         </div>

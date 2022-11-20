@@ -1,12 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { GithubService } from '../../services/github.service';
 import { FormControl } from '@angular/forms';
-// import { EMPTY } from 'rxjs'
-import { filter, switchMap, debounceTime, tap } from 'rxjs/operators';
-import { GithubUserResponse, GithubRepoResponse } from '../../interfaces/github-response.interface';
-import { FormService } from '../../services/form.service';
 import { Router } from '@angular/router';
+
 import { Subscription } from 'rxjs';
+import { filter, switchMap, debounceTime, tap } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+
+import { GithubService } from '../../services/github.service';
+import { FormService } from '../../services/form.service';
+import { GithubUserResponse, GithubRepoResponse } from '../../interfaces/github-response.interface';
+
 
 @Component({
   selector: 'app-repositorio',
@@ -36,8 +39,10 @@ export class RepositorioComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    // if( !this.formService.registerForm ) { this.router.navigateByUrl('/registro') }
+    if( this.formService.registerForm.nombres.trim() === '' ) { this.router.navigateByUrl('/registro') }
 
+    this.formService.limpiarSeleccionados();
+    
     this.subscription = this.githubUsername.valueChanges
       .pipe(
         tap( _ => { 
@@ -73,11 +78,8 @@ export class RepositorioComponent implements OnInit, OnDestroy {
       .subscribe( resp => {
           this.error = false;
           this.loading = false;
-
           // this.githubUser = null;
           this.repositorios = resp;
-
-    
       });
   }
 
@@ -86,6 +88,29 @@ export class RepositorioComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/registro');
   }
 
-  
+  next() {
+    let ul: string = '<ul class="list-group">';
+
+    this.repositoriosSeleccionados.forEach( repo => {
+      ul+= `<li class="list-group-item text-center">* ${ repo.name }</li>`
+    });
+
+    ul += '</ul>';
+
+    Swal.fire({
+      title: 'Esta seguro de enviar los siguientes repositorios?',
+      html: ul,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, enviar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.formService.construirRegistro();
+        this.router.navigateByUrl('/registro/confirmacion');
+      }
+    })
+  }
 
 }

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { calcularEdad } from '../../helpers/fechas';
 
 import Swall from 'sweetalert2';
+
 import { FormService } from '../../services/form.service';
-import { InformacionPersonal } from '../../interfaces/form.interface';
+import { calcularEdad } from '../../helpers/fechas';
+
 
 @Component({
   selector: 'app-info-personal',
@@ -17,12 +18,12 @@ export class InfoPersonalComponent implements OnInit {
   esMayor: boolean = false;
 
   infoPersonalForm = this.fb.group({
-    nombres: ['Jhojan', [ Validators.required, Validators.minLength(3), Validators.maxLength(20) ]],
-    apellidos: ['Mamani', [ Validators.required, Validators.minLength(5), Validators.maxLength(20) ]],
-    ci: [ '12345678', [ Validators.required, Validators.minLength(5), Validators.maxLength(9) ]],
-    extension: [ 'LP', [ Validators.required,] ],
-    direccion: [ 'Av. Uno Calle B', [ Validators.required, Validators.minLength(5) ] ],
-    fechaNacimiento: ['1999-03-19', [ Validators.required ] ]
+    nombres: ['', [ Validators.required, Validators.minLength(3), Validators.maxLength(20) ]],
+    apellidos: ['', [ Validators.required, Validators.minLength(5), Validators.maxLength(20) ]],
+    ci: [ '', [ Validators.required, Validators.minLength(5), Validators.maxLength(9) ]],
+    extension: [ '', [ Validators.required,] ],
+    direccion: [ '', [ Validators.required, Validators.minLength(5) ] ],
+    fechaNacimiento: ['', [ Validators.required ] ]
   });
 
   constructor(
@@ -32,8 +33,12 @@ export class InfoPersonalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if ( this.formService.registerForm === undefined ) { return; }
-    this.infoPersonalForm.setValue( this.formService.registerForm );
+    const data = this.formService.registerForm;
+    if ( data === undefined ) { return; }
+
+    delete data.repositorios;
+
+    this.infoPersonalForm.setValue( data );
   }
 
   nextForm(): void {

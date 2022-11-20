@@ -8,10 +8,16 @@ import { GithubRepoResponse } from '../../interfaces/github-response.interface';
 export class TableReposComponent implements OnInit {
 
   @Input() repositorios: GithubRepoResponse[] = [];
+  dtOptions: DataTables.Settings = {};
 
-  constructor() { }
 
   ngOnInit(): void {
+    this.dtOptions = {
+      responsive: true,
+      language: {
+        "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+      }
+    };
   }
 
   
